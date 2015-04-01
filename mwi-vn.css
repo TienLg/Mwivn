@@ -1,0 +1,234 @@
+	* { font-family: Times New Roman;
+	 }
+	 
+	html, body, #page {
+		margin: 0;
+		padding: 0;}
+
+	#page {
+		//background-color: Snow;
+		//background: rgba(255, 255, 255, 0.0);
+		overflow: auto;
+		width: 100%;
+	}
+	 
+	#sidebar {
+		padding: 0;
+		font-size: 10pt;
+		position: absolute;
+		top: 40px;
+		left: 6px;
+		z-index: 1010;
+		width: 20%;
+	}
+		
+	#sidebar > div {
+		//background: Snow ;
+		//background-color: rgba(255, 255, 255, 0.8);
+		padding: 1%;
+		margin: 0;
+	}
+	
+	#gmap { 
+		width: 100%;
+		z-index: 1000;
+	}
+	
+	#map-canvas {
+		margin-top: 1px;
+	}
+	
+	#topnav {
+		float: left;
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		z-index: 1011;
+		font-size: 10pt;
+		background-color: rgba(255, 255, 255, 0.0); 
+	}
+	
+	
+	#playerswapper, #dataviewer {
+		display: none;
+		top: 50%;
+		left: 50%;
+		margin-top: -300px;
+		margin-left: -320px;
+		height: 500px;
+		width: 640px;
+		position: absolute;
+		z-index: 1013;
+		background: black;
+		border: 2px solid SteelBlue;
+	}
+
+	#detailnav {
+		position: absolute;
+		top: 6px;
+		right: 0px;
+		z-index: 1012;
+		max-height:500px;
+	}
+	#Legendbar {
+		max-width: 300px;
+		float: right;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+	}
+	#MasterView {
+		max-width: 200px;
+		background-color: rgba(255, 255, 255, 0.9); 
+		float: right;
+		overflow: auto;
+		max-height:500px;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+	}
+	
+	.legend {
+		border: 1px solid SteelBlue;
+		padding: 0px;
+		max-width:100%;
+		overflow: auto;
+	}
+	
+	select {
+		margin-bottom: 6px;
+		min-width: 67px;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+		background: Snow;
+		-webkit-box-shadow: 0 1px 0 #ccc, 0 -1px #fff inset;
+		-moz-box-shadow: 0 1px 0 #ccc, 0 -1px #fff inset;
+		box-shadow: 0 1px 0 #ccc, 0 -1px #fff inset;
+	}
+	
+	input {
+		margin-left: 6px;
+		margin-bottom: 6px;
+		-webkit-border-radius: 1px;
+		-moz-border-radius: 1px;
+		border-radius: 1px;
+		background: Snow;
+	}
+	
+	img {
+		width: 100%;
+		margin: 0px;
+		display: block;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+	}
+	
+	b {	color: Crimson;
+	}
+	
+	.ModuleHeader {
+		font-size: 12pt;
+		color: FireBrick;
+		margin-left: 2px;
+	}
+	.ModuleSwapper {
+		margin: 6px 6px 6px 10px;
+	}
+	
+	.doyselect {
+		font-family: verdana;
+		font-size: 0.5em;
+		//background-color: snow;
+		margin-top: 1px;
+	}
+	
+	.FloodSwapper1 {
+		float: left;
+	}
+	
+	.FloodSwapper2 {
+		float: left;
+		margin-left: 10px;
+	}
+	
+	/* Accordions */
+	
+	
+	.ui-accordion .ui-accordion-header{
+		font-weight: bold;
+		font-size: 11pt;
+		margin: 0;
+		padding: 4px 0px 4px 4px;
+		color: white ;
+		background: #6F6F6C;
+		font-family: Arial;
+		border: 1px solid;
+		margin-top: 4px;
+	}
+	.ui-accordion .ui-accordion-header .ui-accordion-header-icon { display: none; }
+	.ui-accordion .ui-accordion-content {
+		background: rgba(255, 255, 255, 1.0);
+		//background: snow;
+		padding: 0; 
+	}
+	
+	.ui-accordion .ui-accordion .ui-accordion-content {
+		background: rgba(255, 255, 255, 0.0);
+		//background: snow;
+		padding: 0; 
+	}
+	.ui-accordion .ui-accordion .ui-accordion-header  .ui-accordion-header-icon{
+		display: none;
+		left: 90%;
+	}
+	.ui-accordion .ui-accordion .ui-accordion-header  {
+		color: White;
+		background: SteelBlue ;
+		border: 1px;
+		margin-top: 4px;
+		font-size: 10pt;
+	}
+	
+	.ui-menu:after {
+		content: ".";
+		display: block;
+		clear: both;
+		visibility: hidden;
+		line-height: 0;
+		height: 0;
+	}
+	.ui-menu .ui-menu-item {
+		display: inline-block;
+		float: left;
+		margin: 0;
+		padding: 0;
+		width: auto;
+	}	
+	
+	.ui-button { 
+		background: lavender;
+		padding: 0;
+		margin: 0px 0px 2px 0px;
+		font-size:9pt;
+		color: black;
+	}
+	
+	/* Icons */
+	.ui-button .ui-icon.show-module{
+		background-image: url(icons/module.png);
+		width: 16px;
+		height: 16px;
+	}
+	.ui-button .ui-icon.show-legend{
+		background-image: url(icons/legend.png);
+		width: 16px;
+		height: 16px;
+	}
+	.ui-button .ui-icon.onoff-overlay{
+		background-image: url(icons/overlay.png);
+		width: 16px;
+		height: 16px;
+	}
+

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vu Hoang Thai Duong</title>
+<META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="mwi-vn.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5VkARHqQvkB0ycqAPsOL4kS6iPHzsRMM"></script>
+<script src="js/geoxml3.js"></script>
+<script src="js/ZipFile.complete.js"></script>
+<script src="js/ProjectedOverlay.js"></script>
+<script src="js/myapp.js"></script>
+</head>
+<body>
+<div id="page">
+	<div id="topnav">
+		<button id="icon-module" class="MenuBtn" title="Show Modules">MODULE</button>
+		<button id="icon-legend" class="MenuBtn" title="Show Legend" style="font-size: 7pt">LEGEND</button>
+		<button id="icon-overlay" class="MenuBtn" title="ON/OFF Overlays" style="font-size: 7pt">ON/OFF</button>
+	</div>
+	
+	<div id="detailnav">
+		<div id="MasterView" class="legend" name="MasterView"></div>
+		<div id="Legendbar"> 
+			<div id="FloodLegend" class="legend" name="RemoteSensingFlood"></div>
+			<div id="LanduseLegend" class="legend" name="RemoteSensingLanduse"></div>
+			<div id="DEMLegend" class="legend" name="DigitalElevationMap"></div>
+			<div id="HydraulicFloodLegend" class="legend" name="HydraulicFlood"></div>
+			<div id="SalinityInstrusionLegend" class="legend" name="SalinityInstrusion"></div>
+			<div id="DykeLegend" class="legend" name="Dyke"></div>
+		</div>
+	</div>
+	
+	
+	<!-- Youtube Player-->
+	<div id="playerswapper">
+		<button id="CloseBtnplayerswapper" class="CloseBtn" style="position: relative; left: 95%;"></button>
+		<video width="640" height="480" controls id="videoplayer"></video>
+	</div>	
+	<div id="dataviewer">
+		<button id="CloseBtndataviewer" class="CloseBtn" style="position: relative; left: 95%;"></button>
+		<img></img>
+	</div>
+
+	<div id="sidebar" class="accordional">
+		<!-- GIS -->
+		<h1 class="sidebarheader" id="GIS">GIS</h1>
+		<div class="ModuleSwapper">
+			<form action="">
+				<b>Ground</b><br/>
+				<input type="checkbox" name="" value="DigitalElevationMap"/>DEM<br/><br/>
+				<b>Station</b><br/>
+				<input type="radio" name="stations" value="ControlStructures"/>Control Structures<br/>
+				<input type="radio" name="stations" value="Dyke"/>Dyke System in 2010<br/>
+				<input type="radio" name="stations" value="FloodPlain"/>Flood Plain<br/>
+				<input type="radio" name="stations" value="HydrologicalStations"/>Hydrological Stations<br/>
+				<input type="radio" name="stations" value="Hydropower-Dam"/>Hydropower-Dam<br/>
+				<input type="radio" name="stations" value="MeteorologicalStations"/>Meteorological Stations<br/>
+				<input type="radio" name="stations" value="ProvincialBoundary"/>Provincial Boundary<br/>
+				<input type="radio" name="stations" value="RiverNetwork"/>River Network<br/>
+				<input type="radio" name="stations" value="None"/>None<br/>
+			</form>
+		</div>
+		<!-- Remote Sensing -->
+		<h1 class="sidebarheader" id="RemoteSensingHeader">REMOTE SENSING</h1>
+		<div class="accordional" id="ModisSatellite">
+		<!-- Land Use Module -->
+			<h1 class="sidebarheader" id="RemoteSensingLanduse">MODIS Land Use</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+				<B>Year</B><br/>
+				<button name="RemoteSensingLanduseYear" class="PreviousBtn"></button>
+				<button name="RemoteSensingLanduseYear" class="NextBtn"></button>
+				<br/>
+				<SELECT size="7" id="RemoteSensingLanduseYear">
+					 <option VALUE=2000>2000</option>
+					 <option VALUE=2001>2001</option>
+					 <option VALUE=2002>2002</option>
+					 <option VALUE=2003>2003</option>
+					 <option VALUE=2004>2004</option>
+					 <option VALUE=2005>2005</option>
+					 <option VALUE=2006>2006</option>
+					 <option VALUE=2007>2007</option>
+					 <option VALUE=2008>2008</option>
+					 <option VALUE=2009>2009</option>
+					 <option VALUE=2010>2010</option>
+					 <option VALUE=2011>2011</option>
+					 <option VALUE=2012>2012</option>
+					 <option VALUE=2013>2013</option>
+					 <option VALUE=2014>2014</option>
+					 <option VALUE=2015>2015</option>
+				</SELECT>
+				</div>
+			</div>
+		<!-- Flood Module -->
+			<h1 class="sidebarheader" id="RemoteSensingFlood">MODIS Flood</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+					<div class="FloodSwapper1">
+						<B>Year</B><br/>
+						<button name="RemoteSensingFloodYear" class="PreviousBtn"></button>
+						<button name="RemoteSensingFloodYear" class="NextBtn"></button>
+						<br/>
+						<SELECT size="7" id="RemoteSensingFloodYear"><br/>
+							 <option VALUE=2000>2000</option>
+							 <option VALUE=2001>2001</option>
+							 <option VALUE=2002>2002</option>
+							 <option VALUE=2003>2003</option>
+							 <option VALUE=2004>2004</option>
+							 <option VALUE=2005>2005</option>
+							 <option VALUE=2006>2006</option>
+							 <option VALUE=2007>2007</option>
+							 <option VALUE=2008>2008</option>
+							 <option VALUE=2009>2009</option>
+							 <option VALUE=2010>2010</option>
+							 <option VALUE=2011>2011</option>
+							 <option VALUE=2012>2012</option>
+							 <option VALUE=2013>2013</option>
+							 <option VALUE=2014>2014</option>
+							 <option VALUE=2015>2015</option>
+						</SELECT></br>
+					</div>
+					<div class="FloodSwapper2">	
+						<B>DOY</B><br/>
+						<button name="RemoteSensingFloodDOY" class="PreviousBtn"></button>
+						<button name="RemoteSensingFloodDOY" class="NextBtn"></button>
+						<br/>
+						<SELECT size="7" id="RemoteSensingFloodDOY">
+							 <option VALUE="145">145 (May.25-Jun.1)</option>
+							 <option VALUE="153">153 (Jun.2-Jun.9)</option>
+							 <option VALUE="161">161 (Jun.10-Jun.17)</option>
+							 <option VALUE="169">169 (Jun.18-Jun.25)</option>
+							 <option VALUE="177">177 (Jun.26-Jul.3)</option>
+							 <option VALUE="185">185 (Jul.4-Jul.11)</option>
+							 <option VALUE="193">193 (Jul.12-Jul.19)</option>
+							 <option VALUE="201">201 (Jul.20-Jul.27)</option>
+							 <option VALUE="209">209 (Jul.28-Aug.4)</option>
+							 <option VALUE="217">217 (Aug.5-Aug.12)</option>
+							 <option VALUE="225">225 (Aug.13-Aug.20)</option>
+							 <option VALUE="233">233 (Aug.21-Aug.28)</option>
+							 <option VALUE="241">241 (Aug.29-Sep.5)</option>
+							 <option VALUE="249">249 (Sep.6-Sep.13)</option>
+							 <option VALUE="257">257 (Sep.14-Sep.21)</option>
+							 <option VALUE="265">265 (Sep.22-Sep.29)</option>
+							 <option VALUE="273">273 (Sep.30-Oct.7)</option>
+							 <option VALUE="281">281 (Oct.8-Oct.15)</option>
+							 <option VALUE="289">289 (Oct.16-Oct.23)</option>
+							 <option VALUE="297">297 (Oct.24-Oct.31)</option>
+							 <option VALUE="305">305 (Nov.1-Nov.8)</option>
+							 <option VALUE="313">313 (Nov.9-Nov.16)</option>
+							 <option VALUE="321">321 (Nov.17-Nov.24)</option>
+							 <option VALUE="329">329 (Nov.25-Dec.2)</option>
+							 <option VALUE="337">337 (Dec.3-Dec.10)</option>
+							 <option VALUE="345">345 (Dec.11-Dec.18)</option>
+							 <option VALUE="353">353 (Dec.19-Dec.26)</option>
+							 <option VALUE="361">361 (Dec.27-Jan.3)</option>
+						</SELECT>
+						<br/>
+					</div>
+				</div>
+				<div class="ModuleSwapper">
+					<button id="AnimateFlood" class="FuncBtn">Play</button>
+				</div>
+			</div>
+			 <!-- Envisat ASAR -->
+			<h1 class="sidebarheader" id="EnvisatASAR">Envisat ASAR</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+					<div class="FloodSwapper1">
+						<B>Year</B><br/>
+						<button name="EnvisatASARYear" class="PreviousBtn"></button>
+						<button name="EnvisatASARYear" class="NextBtn"></button>
+						<br/>
+						<SELECT size="7" id="EnvisatASARYear"><br/>
+							 <option VALUE=2007>2007</option>
+							 <option VALUE=2008>2008</option>
+							 <option VALUE=2009>2009</option>
+							 <option VALUE=2010>2010</option>
+							 <option VALUE=2011>2011</option>
+						</SELECT></br>
+					</div>
+					<div class="FloodSwapper2">	
+						<B>DOY</B><br/>
+						<button name="EnvisatASARDOY" class="PreviousBtn"></button>
+						<button name="EnvisatASARDOY" class="NextBtn"></button>
+						<br/>
+						<SELECT size="7" id="EnvisatASARDOY">
+							 <option VALUE="20070614">2007-06-14</option>
+							 <option VALUE="20070703">2007-07-03</option>
+							 <option VALUE="20070710">2007-07-10</option>
+							 <option VALUE="20070719">2007-07-19</option>
+							 <option VALUE="20070807">2007-08-07</option>
+							 <option VALUE="20070814">2007-08-14</option>
+							 <option VALUE="20070823">2007-08-23</option>
+							 <option VALUE="20070911">2007-09-11</option>
+							 <option VALUE="20070918">2007-09-18</option>
+							 <option VALUE="20071016">2007-10-16</option>
+							 <option VALUE="20071023">2007-10-23</option>
+							 <option VALUE="20071101">2007-11-01</option>
+							 <option VALUE="20071120">2007-11-20</option>
+							 <option VALUE="20071127">2007-11-27</option>
+							 <option VALUE="20071206">2007-12-06</option>
+							 <option VALUE="20080601">2008-06-01</option>
+							 <option VALUE="20080617">2008-06-17</option>
+							 <option VALUE="20080624">2008-06-24</option>
+							 <option VALUE="20080703">2008-07-03</option>
+							 <option VALUE="20080722">2008-07-22</option>
+							 <option VALUE="20080814">2008-08-14</option>
+							 <option VALUE="20080823">2008-08-23</option>
+							 <option VALUE="20080826">2008-08-26</option>
+							 <option VALUE="20080911">2008-09-11</option>
+							 <option VALUE="20080930">2008-09-30</option>
+							 <option VALUE="20081007">2008-10-07</option>
+							 <option VALUE="20081016">2008-10-16</option>
+							 <option VALUE="20081104">2008-11-04</option>
+							 <option VALUE="20081111">2008-11-11</option>
+							 <option VALUE="20081120">2008-11-20</option>
+							 <option VALUE="20081123">2008-11-23</option>
+							 <option VALUE="20081216">2008-12-16</option>
+							 <option VALUE="20081225">2008-12-25</option>
+							 <option VALUE="20090602">2009-06-02</option>
+							 <option VALUE="20090618">2009-06-18</option>
+							 <option VALUE="20090704">2009-07-04</option>
+							 <option VALUE="20090827">2009-08-27</option>
+							 <option VALUE="20091001">2009-10-01</option>
+							 <option VALUE="20091210">2009-12-10</option>
+							 <option VALUE="20091213">2009-12-13</option>
+							 <option VALUE="20100114">2010-01-14</option>
+							 <option VALUE="20100117">2010-01-17</option>
+							 <option VALUE="20100218">2010-02-18</option>
+							 <option VALUE="20100325">2010-03-25</option>
+							 <option VALUE="20100429">2010-04-29</option>
+							 <option VALUE="20100502">2010-05-02</option>
+							 <option VALUE="20100603">2010-06-03</option>
+							 <option VALUE="20100708">2010-07-08</option>
+							 <option VALUE="20100812">2010-08-12</option>
+							 <option VALUE="20100815">2010-08-15</option>
+							 <option VALUE="20100916">2010-09-16</option>
+							 <option VALUE="20101008">2010-10-08</option>
+							 <option VALUE="20101021">2010-10-21</option>
+							 <option VALUE="20110103">2011-01-03</option>
+							 <option VALUE="20110114">2011-01-14</option>
+							 <option VALUE="20110202">2011-02-02</option>
+							 <option VALUE="20110304">2011-03-04</option>
+							 <option VALUE="20110315">2011-03-15</option>
+							 <option VALUE="20110403">2011-04-03</option>
+							 <option VALUE="20110621">2011-06-21</option>
+						</SELECT>
+						<br/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Remote Sensing -->
+
+		<h1 class="sidebarheader" id="HydraulicSimulation">HYDRAULIC SIMULATION</h1>
+		<div class="accordional" id="HydraulicSimulationSwapper">
+			<!-- Salinity Intrusion Module -->
+			<h1 class="sidebarheader" id="HydraulicFlood">Flood</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+					<B>Scenario</B><br/>
+					<button name="HydraulicFloodYear" class="PreviousBtn"></button>
+					<button name="HydraulicFloodYear" class="NextBtn"></button>
+					<br/>
+					<SELECT size="7" id="HydraulicFloodYear">
+						 <option VALUE=2000>Flood 2000</option>
+						 <option VALUE=2001>Flood 2001</option>
+						 <option VALUE=2011>Flood 2011</option>
+						 <option VALUE=2012>Flood 2012</option>
+						 <option VALUE=2013>Flood 2013</option>
+					</SELECT>
+				</div>
+			</div>
+			<!-- Salinity Intrusion Module -->
+			<h1 class="sidebarheader" id="HydraulicLanduse">Land Use Change Scenarios</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+					<B>Scenario</B><br/>
+					<button name="HydraulicLanduseScenarios" class="PreviousBtn"></button>
+					<button name="HydraulicLanduseScenarios" class="NextBtn"></button>
+					<br/>
+					<SELECT size="7" id="HydraulicLanduseScenarios" style="max-width: 98%;">
+						 <option title="Full-dyke System in AnGiang & DongThap" VALUE=0>Full-dyke System in AnGiang & DongThap</option>
+						 <option title="Reduce 20% Full-dike System in AnGiang" VALUE=20>Reduce 20% Full-dike System in AnGiang</option>
+						 <option title="Reduce 40% Full-dike System in AnGiang" VALUE=40>Reduce 40% Full-dike System in AnGiang</option>
+						 <option title="Reduce 60% Full-dike System in AnGiang" VALUE=60>Reduce 60% Full-dike System in AnGiang</option>
+						 <option title="Reduce 80% Full-dike System in AnGiang" VALUE=80>Reduce 80% Full-dike System in AnGiang</option>
+						 <option title="Reduce 100% Full-dike System in AnGiang" VALUE=100>Reduce 100% Full-dike System in AnGiang</option>
+					</SELECT>
+				</div>
+			</div>
+			<!-- Salinity Intrusion Module -->
+			<h1 class="sidebarheader" id="SeaLevelRise">Sea Level Rise Scenarios</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+					<B>Scenario</B><br/>
+					<button name="SeaLevelRiseScenarios" class="PreviousBtn"></button>
+					<button name="SeaLevelRiseScenarios" class="NextBtn"></button>
+					<br/>
+					<SELECT size="7" id="SeaLevelRiseScenarios">
+						 <option VALUE=10>SLR 10cm</option>
+						 <option VALUE=30>SLR 30cm</option>
+						 <option VALUE=50>SLR 50cm</option>
+						 <option VALUE=75>SLR 75cm</option>
+						 <option VALUE=100>SLR 100cm</option>
+					</SELECT>
+				</div>
+			</div>
+			<!-- Sea Level Rive Scenarios Module -->
+			<h1 class="sidebarheader" id="SalinityInstrusion">Salinity Instrusion</h1>
+			<div class="Swapper">
+				<div class="ModuleSwapper">
+					<B>Scenario</B><br/>
+					<button name="SalinityInstrusionScenarios" class="PreviousBtn"></button>
+					<button name="SalinityInstrusionScenarios" class="NextBtn"></button>
+					<br/>
+					<SELECT size="7" id="SalinityInstrusionScenarios">
+						 <option VALUE=2004>Dry Season in 2004</option>
+						 <option VALUE=2005>Dry Season in 2005</option>
+						 <option VALUE=2006>Dry Season in 2006</option>
+						 <option VALUE=2007>Dry Season in 2007</option>
+						 <option VALUE=2008>Dry Season in 2008</option>
+						 <option VALUE=2009>Dry Season in 2009</option>
+						 <option VALUE=2010>Dry Season in 2010</option>
+						 <option VALUE=2011>Dry Season in 2011</option>
+						 <option VALUE=2012>Dry Season in 2012</option>
+						 <option VALUE=2013>Dry Season in 2013</option>
+						 <option VALUE=2014>Dry Season in 2014</option>
+						 <option VALUE=2015>Dry Season in 2015</option>
+					</SELECT>
+				</div>
+			</div>
+		</div>
+		<h1 class="sidebarheader" id="Statistical">STATISTICAL DATA</h1>
+		<div class="ModuleSwapper">
+			<B>Data</B><br/>
+			<button name="StatisticalData" class="PreviousBtn"></button>
+			<button name="StatisticalData" class="NextBtn"></button>
+			<br/>
+			<SELECT size="7" id="StatisticalData" style="max-width: 98%;">
+				 <option VALUE="StatData1">Inland aquaculture area in Mekong delta</option>
+				 <option VALUE="StatData2">Total rice-planted area in Mekong delta</option>
+			</SELECT>
+		</div>
+	</div>
+	<!-- Google Map Module-->
+	<div id="gmap">
+		<div id="map-canvas"></div>
+	</div>
+</div>
+</body>
+</html>
